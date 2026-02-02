@@ -1,0 +1,43 @@
+# =============================================================================
+# NETLIFY CONFIGURATION
+# =============================================================================
+# Este arquivo configura o Netlify para build e desenvolvimento local.
+#
+# PORTAS UTILIZADAS:
+# - port (8888): Porta principal onde você acessa o site
+# - functionsPort (3999): Porta interna para funções/live reload
+#
+# Se você receber erro "EADDRINUSE", mate processos conflitantes:
+# kill -9 $(lsof -t -i :3999) && kill -9 $(lsof -t -i :8888)
+# =============================================================================
+
+[build]
+  publish = "."
+
+[images]
+  remote_images = ["https://.*"]
+
+[dev]
+  publish = "."
+  port = 8888
+  functionsPort = 3999
+  framework = "#static"
+  autoLaunch = false
+
+# =============================================================================
+# TROUBLESHOOTING
+# =============================================================================
+#
+# Erro: "EADDRINUSE ::1:3999"
+# Causa: Outro Netlify Dev está rodando (provavelmente em outro projeto)
+# Solução: kill -9 $(lsof -t -i :3999)
+# Alternativa: Use outra porta via CLI: netlify dev --functions-port 4000
+#
+# Erro: "Could not acquire required 'port': '8888'"
+# Causa: A porta 8888 está ocupada
+# Solução: netlify dev --port 8889
+#
+# Erro: "netlify: command not found"
+# Solução: npm install -g netlify-cli
+#
+# =============================================================================
